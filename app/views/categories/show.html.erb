@@ -3,7 +3,9 @@
 <div class="text-center mt-4">
   <% if logged_in? && current_user.admin? %>
     <%= link_to "Edit your category", edit_category_path(@category), class: "btn btn-outline-info"%>
+    <%= link_to "Delete category", category_path(@category), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger"%>
   <%end%>
+
 </div>
 
 <h3 class="text-center mt-4">Articles</h3>
