@@ -12,6 +12,11 @@ RSpec.describe Category, type: :model do
       expect(@category).to_not be_valid
     end
 
+    it '::must be unique' do
+      @category2 = Category.new(name: 'testing')
+      expect(@category2).to_not be_valid
+    end
+
     it '::name length should be more than 4' do
       @category.name = 'a' * 4
       expect(@category).to_not be_valid

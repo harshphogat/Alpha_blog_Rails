@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-
   before_action :require_admin, except: [:show, :index]
 
   def new
@@ -37,9 +36,14 @@ class CategoriesController < ApplicationController
     else
       render 'new'
     end
-
   end
-  
+
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    redirect_to categories_path
+  end
+
   private
 
   def category_params
@@ -52,5 +56,4 @@ class CategoriesController < ApplicationController
       redirect_to categories_path
     end
   end
-
 end

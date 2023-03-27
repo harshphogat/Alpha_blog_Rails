@@ -5,8 +5,13 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false },
                     length: { maximum: 105 }, format: { with: VALID_EMAIL_REGEX }
-  VALID_PASSWORD_REGEX = /\A(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[[:^alnum:]])/x
-  validates :password, presence: true, format: { with: VALID_PASSWORD_REGEX },
-                       length: { maximum: 15 }
+  VALID_PASSWORD_REGEX = /\A
+                          (?=.{8,})
+                          (?=.*\d)
+                          (?=.*[a-z])
+                          (?=.*[A-Z])
+                          (?=.*[[:^alnum:]])
+                        /x
+  validates :password, presence: true, format: { with: VALID_PASSWORD_REGEX }
   has_secure_password
 end
