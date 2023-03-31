@@ -6,7 +6,11 @@ class ArticlesController < ApplicationController
   def show; end
 
   def index
-    @articles = Article.paginate(page: params[:page], per_page: 4)
+    if current_user
+      @articles = Article.where(user_id: current_user.followings << current_user).paginate(page: params[:page], per_page: 4)
+    else
+      redirect_to login_path
+    end
   end
 
   def new

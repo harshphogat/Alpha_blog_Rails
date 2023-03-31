@@ -23,6 +23,11 @@
                             <%if current_user.admin? || user == current_user%>
                                 <%= link_to 'Delete user', user_path(user), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure you want to delete the user account and all associated articles?"} %>
                             <%end%>
+                            <%if user != current_user && followed(user) %>
+                                <%= link_to 'Following', unfollow_path(user), method: :delete, class: "btn btn-outline-success" %>
+                            <%elsif user != current_user %>
+                                <%= link_to 'Follow', follow_path(user), method: :post, class: "btn btn-outline-success" %>
+                            <%end%>
                         <%end%>
                     </div>
                     <div class="card-footer text-muted">

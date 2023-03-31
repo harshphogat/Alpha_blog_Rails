@@ -48,6 +48,19 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def follow
+    @user = User.find(params[:format])
+    current_user.followings << @user
+    redirect_to users_path
+  end
+
+  def unfollow
+    @user = User.find(params[:format])
+    @unfollow = Follow.where(follower_id: current_user.id, followed_user_id: @user.id).first
+    @unfollow.destroy
+    redirect_to users_path
+  end
+  
   private
 
   def user_params
